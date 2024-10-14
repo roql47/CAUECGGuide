@@ -28,7 +28,6 @@ flutter:
   uses-material-design: true
 
   assets:
-    - config.env
     - assets/images/class/sinus_rhythm.png
     - assets/images/class/sinus_bradycardia.png
     - assets/images/class/sinus_tachycardia.png
