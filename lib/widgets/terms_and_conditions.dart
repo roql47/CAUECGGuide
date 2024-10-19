@@ -6,11 +6,11 @@ void showTermsAndConditions(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('심전도앱 V1.0.9'),
+        title: Text('심전도앱 V1.1.0'),
         content: SingleChildScrollView(
           child: ListBody(
             children: <Widget>[
-              Text('1. 이 앱은 간호학과 학생, 간호사, 의대생, 의사, 응급 구조사, 임상병리사, 기타 의료 종사자, 심전도 해석을 배우고자 하는 일반인들을 대상으로, 심전도 해석과 관련된 다양한 학습 자료와 문제를 제공하여 사용자가 심전도 판독능력을 향상시키는데 도움을 주는 어플입니다.'),
+              Text('1. 이 앱은 간호학과 학생, 간호사, 방사선사, 의대생, 의사, 응급 구조사, 임상병리사, 기타 의료 종사자, 심전도 해석을 배우고자 하는 일반인들을 대상으로, 심전도 해석과 관련된 다양한 학습 자료와 문제를 제공하여 사용자가 심전도 판독능력을 향상시키는데 도움을 주는 어플입니다.'),
               SizedBox(height: 10),
               Text('2. 해당 앱의 자료 정보는 중앙대학교 광명병원에 있습니다.'),
               SizedBox(height: 10),
@@ -58,7 +58,7 @@ class UpdateStatusPage extends StatelessWidget {
           child: Column(
             // 모든 자식 위젯들을 왼쪽으로 정렬
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            children: <Widget>[
               // 버전 제목
               Text(
                 'V1.0.0',
@@ -369,6 +369,27 @@ class UpdateStatusPage extends StatelessWidget {
               SizedBox(height: 5),
               Text(
                 '3. 기타 버그 fix',
+                style: TextStyle(fontSize: 16),
+                textAlign: TextAlign.left,
+              ),
+              SizedBox(height: 20),
+
+              Text(
+                'V1.1.0',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.left,
+              ),
+              SizedBox(height: 3),
+
+              // 업데이트 항목
+              Text(
+                '1. ECG guide 항목 2개 추가',
+                style: TextStyle(fontSize: 16),
+                textAlign: TextAlign.left,
+              ),
+              SizedBox(height: 5),
+              Text(
+                '2. 퀴즈페이지에서 학습자의 진행상황을 표시해주는 대시보드 추가',
                 style: TextStyle(fontSize: 16),
                 textAlign: TextAlign.left,
               ),

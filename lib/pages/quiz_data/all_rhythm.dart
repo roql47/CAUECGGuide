@@ -140,7 +140,7 @@ const List<Map<String, dynamic>> allrhythmQuizQuestions = [
 'Answer': 'Anterior STEMI'
 },
 {
-'image': 'assets/images/quiz/atrial_fibrillation.png',
+'image': 'assets/images/class/atrial_fibrillation.png',
 'heartRate': '140',
 'prInterval': '',
 'qrsDuration': '110',

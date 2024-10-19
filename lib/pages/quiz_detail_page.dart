@@ -1,108 +1,13 @@
 import 'package:flutter/material.dart';
 import 'dart:math'; // Random 클래스 사용
+import 'full_screen_image.dart'; // FullScreenImage import
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  // 샘플 퀴즈 질문 데이터
-  final List<Map<String, dynamic>> quizQuestions = [
-    {
-      'image': 'assets/image1.png',
-      'Answer': 'Rhythm A',
-      'heartRate': 80,
-      'prInterval': 160,
-      'qrsDuration': 100,
-      'axis': 0,
-      'qtcb': 400,
-      'qtcf': 420,
-    },
-    {
-      'image': 'assets/image2.png',
-      'Answer': 'Rhythm B',
-      'heartRate': 100,
-      'prInterval': 150,
-      'qrsDuration': 110,
-      'axis': -30,
-      'qtcb': 390,
-      'qtcf': 410,
-    },
-    // 추가 질문을 여기에 추가하세요
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Quiz App',
-      theme: ThemeData(
-        primarySwatch: Colors.teal,
-      ),
-      home: QuizDetailPage(quizQuestions: quizQuestions),
-    );
-  }
-}
-
-// 전체화면 이미지 뷰어 클래스 정의
-class FullScreenImage extends StatefulWidget {
-  final String imageAssetPath;
-
-  FullScreenImage({required this.imageAssetPath});
-
-  @override
-  _FullScreenImageState createState() => _FullScreenImageState();
-}
-
-class _FullScreenImageState extends State<FullScreenImage> {
-  final double rotationAngle = 90; // 초기 회전 각도 (90도)
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white, // 전체 화면 배경을 검은색으로 설정
-      body: GestureDetector(
-        onTap: () {
-          Navigator.pop(context); // 이미지 클릭 시 이전 화면으로 돌아감
-        },
-        child: InteractiveViewer(
-          panEnabled: true, // 드래그 가능
-          scaleEnabled: true, // 확대/축소 가능
-          minScale: 1.0, // 최소 배율
-          maxScale: 4.0, // 최대 배율
-          child: Center(
-            child: Hero(
-              tag: widget.imageAssetPath, // Hero 애니메이션을 위한 태그
-              child: Transform.rotate(
-                angle: rotationAngle * (pi / 180), // 90도로 회전
-                child: Image.asset(
-                  widget.imageAssetPath,
-                  fit: BoxFit.contain, // 이미지가 화면에 맞게 조정됨
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      color: Colors.grey,
-                      child: Center(
-                        child: Text(
-                          'Image not found',
-                          style: TextStyle(fontSize: 18, color: Colors.white),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-// 퀴즈 상세 페이지 클래스 정의
 class QuizDetailPage extends StatefulWidget {
   final List<Map<String, dynamic>> quizQuestions;
+  final Function onAnswerCorrect; // 정답 처리 콜백 추가
+  final Function onAnswerIncorrect; // 오답 처리 콜백 추가
 
-  QuizDetailPage({required this.quizQuestions});
+  QuizDetailPage({required this.quizQuestions, required this.onAnswerCorrect, required this.onAnswerIncorrect});
 
   @override
   _QuizDetailPageState createState() => _QuizDetailPageState();
@@ -144,6 +49,7 @@ class _QuizDetailPageState extends State<QuizDetailPage> {
   // 사용자의 답변을 확인하는 함수
   void checkAnswer(String selectedAnswer) {
     if (selectedAnswer == correctAnswer) {
+      widget.onAnswerCorrect(); // 정답일 경우 콜백 호출
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -164,6 +70,7 @@ class _QuizDetailPageState extends State<QuizDetailPage> {
         ),
       );
     } else {
+      widget.onAnswerIncorrect(); // 오답일 경우 콜백 호출
       showDialog(
         context: context,
         builder: (context) => AlertDialog(

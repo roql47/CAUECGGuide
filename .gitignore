@@ -42,5 +42,14 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# Environment Variables
-config.env
+# Android Virtual Devices (AVD) 관련 파일 제외
+.android/
+
+# Windows 관련 시스템 파일 제외
+AppData/
+Local Settings/
+My Documents/
+Desktop/
+Recent/
+NetHood/
+PrintHood/
